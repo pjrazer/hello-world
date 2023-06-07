@@ -7,4 +7,9 @@ while x != 10:
     count += 1
 
 print(count)
-#just adding comments
+#just adding comment
+y = input('Please introduce yourself: ')
+def intro(x):
+    print(f'Here is your introduction: {x}')
+
+intro(y)
