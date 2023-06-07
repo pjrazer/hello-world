@@ -7,3 +7,4 @@ while x != 10:
     count += 1
 
 print(count)
+#just adding comments
