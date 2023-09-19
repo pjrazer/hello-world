@@ -1,12 +1,6 @@
 import numpy as np
 
 def secant(fun, ini_guess, err_max=1e-6, iter_max=100):
-    # Input validation
-    if not callable(fun):
-        raise ValueError('The first input must be a callable function.')
-    if not (isinstance(ini_guess, float) or isinstance(ini_guess, int)):
-        raise ValueError('The second input must be a numeric value.')
-
     # Initialize the second initial guess using a small offset
     h = 1
     x0 = ini_guess
@@ -15,7 +9,12 @@ def secant(fun, ini_guess, err_max=1e-6, iter_max=100):
     # Initialize iteration counter and error
     numIter = 0
     err = abs(x1 - x0)
-
+    if (not isinstance(err_max, float) and not isinstance(err_max, int)) or err_max<=0:
+        raise Exception('The fourth and fifth inputs must be positive scalar values.')
+        
+    if (not isinstance(iter_max, float) and not isinstance(iter_max, int)) or iter_max<=0:
+        raise Exception('The fourth and fifth inputs must be positive scalar values.')
+        
     # Main loop for the secant method
     while err >= err_max and numIter < iter_max:
         try:
@@ -33,9 +32,10 @@ def secant(fun, ini_guess, err_max=1e-6, iter_max=100):
             x0 = x1
             x1 = x2
             numIter += 1
-
             if np.isnan(fun(x2)) or np.isinf(fun(x2)):
-                return x2, err, numIter, -2
+                
+                return x2,err, numIter, -2
+                
 
         except (ZeroDivisionError, ValueError, TypeError):
             # Handle exceptions due to invalid function values or division by zero
