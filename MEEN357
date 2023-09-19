@@ -1,14 +1,3 @@
-
-# By submitting this assignment, I agree to the following:
-#  “Aggies do not lie, cheat, or steal, or tolerate those who do.”
-#  “I have not given or received any unauthorized aid on this assignment.”
-#
-# Name: John Maggio
-# Section: 502
-# Assignment: 
-# Date: 2023
-#
-
 import numpy as np
 from math import sin, cos
 
@@ -26,7 +15,7 @@ def bisection(fun,lb,ub,err_max=1e-5,iter_max=1000):
     if (not isinstance(iter_max, float) and not isinstance(iter_max, int)) or iter_max<=0:
         raise Exception('The fourth and fifth inputs must be positive scalar values.')
     if (fun(ub) > 0 and fun(lb) > 0) or (fun(ub) < 0 and fun(lb) < 0):
-        raise Exception('Invalid bracket values!!!!')
+         raise Exception('Invalid bracket values!!!!')
     xr = (lb+ub)/2
     done = False
     no_iter = 0
@@ -51,19 +40,11 @@ def bisection(fun,lb,ub,err_max=1e-5,iter_max=1000):
         elif fun(ub) > 0 and fun(lb) > 0 or fun(ub) < 0 and fun(lb) < 0:
             flag = -1
             break
-        elif fun(ub) == float('NaN') or fun(lb) == float('NaN') or fun(ub) == float('Inf') or fun(lb) == float('Inf'):
-            flag = -1
+        elif fun(ub) == float('NaN') or fun(lb) == float('NaN') or fun(ub) == float('Inf')\
+            or fun(lb) == float('Inf') or fun(ub):
+            flag = -2
             break
         if err_est<err_max or no_iter > iter_max:
             done = True
     return xr,err_est,no_iter,flag
     
-
-
-# def x(y):
-#     si = sin(y)
-#     co = cos(y)
-#     eq = y*si+3*co-y
-#     return eq
-# root = bisection(x,0,0)
-# print(root)
